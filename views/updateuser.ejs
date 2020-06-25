@@ -1,0 +1,107 @@
+<div class="card-panel  blue darken-4">
+  <nav class=" z-depth-0">
+      <div class="nav-wrapper blue darken-4 z-depth-0">
+        <a href="#" class="brand-logo">Login Auth</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a class="waves-effect waves-light btn-floating btn-large modal-trigger pulse blue" href="#modal1" onclick="modal()"><i class="material-icons">add</i></a>
+          </li>
+          <li><a class="pink accent-3 btn" href="/users/logout">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+<!-- ==================container-part -->
+<div class="container">
+  <div class="card-panel  ">
+    <div class="card z-depth-0">
+      <div class="row">
+        <div class="col s12">
+          <!-- ================== Row Number 1 Header================== -->
+          <div class="row">
+            <div class="col s12  ">
+              <div class="center">
+                <h3>Update Profile</h3> 
+                </div>
+            </div>
+          </div>
+          <!-- ================== Row Number 1 profile================== -->
+          <div class="row">
+            <div class="col s6  "> 
+              <img src="/uploads/<%= typeof usrdata.image != 'undefined' ? usrdata.image : '' %>"  style="border-radius: 5px;" class="responsive-img"/>
+            </div>
+            <div class="col s6  ">
+              <!-- ===================Update form code goes here============= -->
+
+              <form action="/users/dashboard/<%= usrdata._id %>" method="POST" > 
+                  <div class="input-field   ">
+                    <input placeholder="Placeholder" id="first_name" type="text" name="name" class="validate" value="<%= usrdata.name %>">
+                    <label for="Name"> Name</label>
+                  </div>  
+                  <div class="input-field   ">
+                    <input id="email" type="email" class="validate" name="email"  value="<%= usrdata.email %>">
+                    <label for="email">Email</label>
+                  </div>
+                  <div class="input-field  ">
+                    <input id="username" type="text" class="validate"  name="username" value="<%= usrdata.username %>">
+                    <label for="username">User Name</label>
+                  </div> 
+                  <div class="input-field  center">
+                      <button type="submit" class="btn btn-primary btn-block"> Update </button>
+                  </div>  
+              </form> 
+              <!-- ========================================================== -->
+            </div>
+          </div>
+          <!-- ================== Row Number 1 xls & image================== -->
+          <div class="row">
+            <div class="col s6 ">
+              <!-- ==================================Image Uploading profile =================-->
+              <!-- <span><%= typeof usrdata.image != 'undefined' ? usrdata.image : '' %></span> -->
+              <blockquote>
+                Upload profile
+              </blockquote>
+              <form action="/users/upload/<%= usrdata._id %>" method="POST" enctype="multipart/form-data">
+                  <div class="file-field input-field">
+                    <div class="btn grey">
+                      <span>File</span>
+                      <input name="myImage" type="file">
+                    </div>
+                    <div class="file-path-wrapper">
+                      <input class="file-path validate" type="text">
+                    </div>
+                  </div>
+                  <button type="submit" class="btn">Submit</button>
+              </form>
+            </div>
+            <div class="col s6  ">
+              <!-- =========================xls uploading================ -->
+              <blockquote>
+                 Upload XLS
+              </blockquote>
+              <form action="/users/uploadxls/<%= usrdata._id %>" method="POST" enctype="multipart/form-data">
+                <div class="file-field input-field">
+                  <div class="btn grey">
+                    <span>File</span>
+                    <input name="myXlsx" type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" >
+                  </div>
+                  <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                  </div>
+                </div>  
+                <button type="submit" class="btn">Submit</button>
+                <% if(usrdata.userFile == 'undefined'){ %>
+                  <span></span> 
+                <% } else{ %>  
+                  <a class="btn-floating btn-small waves-effect waves-light red"
+                  href="/xlsfiles/<%= typeof usrdata.userFile != 'undefined' ? usrdata.userFile : '' %>" target="_self" download><i class="material-icons">file_download
+                 </i></a>
+                <% } %>
+              </form>
+
+            </div>
+          </div> 
+        </div>
+      </div>
+    </div>
+ </div>
+</div>

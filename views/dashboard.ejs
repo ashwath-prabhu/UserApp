@@ -1,0 +1,135 @@
+<div class="card-panel  blue darken-4">
+<nav class=" z-depth-0">
+    <div class="nav-wrapper blue darken-4 z-depth-0">
+      <a href="#" class="brand-logo">Login Auth</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a class="waves-effect waves-light btn-floating btn-large modal-trigger pulse blue" href="#modal1" onclick="modal()"><i class="material-icons">add</i></a>
+        </li>
+        <li><a class="pink accent-3 btn" href="/users/logout">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+<!-- ================Table content=============== -->
+  <div class="container">
+    <blockquote>
+      <p class="flow-text">User Panel</p>
+    </blockquote>
+    <div class="col s12 m8 offset-m2 l6 offset-l3">
+      <div class="card-panel grey lighten-5 z-depth-1">
+        <div class="row valign-wrapper">
+          <div class="col s2">
+            <img src="https://materializecss.com/images/yuna.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+          </div>
+          <div class="col s10">
+            <span class="black-text">
+              This is a square image. Add the "circle" class to it to make it appear circular.
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <blockquote>
+      <p class="flow-text">User Panel</p>
+    </blockquote>
+    <div class="divider"></div>
+<table>
+  <thead>
+    <tr>
+        <th>Name</th>
+        <th>User Name</th>
+        <th>Email</th>
+        <th>XL-Files</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% users.forEach(function (user) { %>
+    <tr>
+      
+      <td><%= user.name %></td>
+      <td><%= user.username %></td>
+      <td><%= user.email %></td>
+      <td>
+      <% if(user.userFile == 'undefined'){ %>
+        <a class="btn-floating btn-small disabled" ><i class="material-icons">file_download </i></a>
+      <% } else{ %>  
+        <a class="btn-floating btn-small waves-effect waves-light red"
+        href="/xlsfiles/<%= typeof user.userFile != 'undefined' ? user.userFile : '' %>" target="_self" download><i class="material-icons">file_download
+       </i></a>
+     <% } %>
+    </td>
+      <td> <a class="btn-floating btn-small waves-effect waves-light blue" href="/users/updateuser/<%= user._id %>"><i class="material-icons">edit</i></a></td>
+      <td> <a href="/users/dashboard/<%= user._id %>" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete</i></a></td>
+   
+    </tr>
+    
+<% }) %>
+  </tbody>
+</table>
+      
+</div>
+ 
+ 
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <div class="row">
+
+        <div class="container">
+        <form action="/users/adusrs" method="POST"class="col s12">
+          <div class="row">
+            <div class="input-field col s12">
+              <input placeholder="Placeholder" id="first_name" type="text" name="name" class="validate"
+              value="<%= typeof name != 'undefined' ? name : '' %>"
+               >
+              <label for="Name"> Name</label>
+            </div> 
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="email" type="email" class="validate" name="email"
+              value="<%= typeof email != 'undefined' ? email : '' %>"
+              >
+              <label for="email">Email</label>
+            </div>
+          
+            <div class="row">
+                <div class="input-field col s12">
+                  <input id="username" type="text" class="validate"  name="username"
+                  value="<%= typeof username != 'undefined' ? username : '' %>"
+                  >
+                  <label for="username">User Name</label>
+                </div>
+              </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="password" type="password" class="validate"  name="password"
+              value="<%= typeof password != 'undefined' ? password : '' %>"
+              >
+              <label for="password">Password</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 center">
+                <button type="submit" class="btn btn-primary btn-block">
+                    Add
+                  </button>
+            </div>
+          </div>
+           
+        </form>
+    </div>
+      </div>
+     </div>
+    </div>
+    <!-- <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div> -->
+  </div>
+          
